@@ -1,188 +1,161 @@
-Your [project](https://vikramsinghmtl.github.io/420-4W6-Web-Programming-II/project/specifications) proposal will go here. Since you have to write your proposal in markdown, I've provided the sample proposal below so you have a reference for the syntax. Don't worry about getting rid of my stuff below since there's the live [sample proposal](https://vikramsinghmtl.github.io/420-4W6-Web-Programming-II/project/example-proposal) copy on the notes website.
+# "Mischevious Quiz" Game
 
----
+"Mischievous Quiz" is an engaging and interactive quiz game where simplicity meets deception. Each question, while seemingly straightforward, is a clever trick or a witty riddle designed to challenge the player. The real charm of the game comes from its charismatic quizmaster, a character who delights in cheekily commenting on players' responses—celebrating their successes with humor and poking fun at their missteps. This game is not just about right answers; it's a playful battle of wits where the quizmaster brings an element of surprise and amusement to every question. 
 
-![Banner](images/collab.png)
+Perfect for:
+-   **Curious Minds:** Ideal for those who love to probe and ponder, perfect for players who enjoy puzzles and mind games.
+-   **Social Players:** A great choice for game nights, offering a mix of humor and challenge that sparks conversation and laughter.
+-   **Learners of All Ages:** From young learners to the young at heart, suitable for anyone who likes learning through play and enjoys being challenged in unexpected ways.
 
-Introducing "Taskr" – a collaborative task management platform where teams, families, or study groups can manage shared projects and hold each other accountable. This app is for:
+Many quiz games either lack interactivity or are not challenging enough, leading to quick disinterest. Mischievous Quiz aims to keep players on their toes with hilariously misleading questions and a taunting quizmaster.
 
--   Small teams and project groups needing a lightweight way to coordinate tasks.
--   Households or roommates looking to organize shared chores and responsibilities.
--   Students working on group assignments.
+## Core Functionality
 
-Many existing task managers are overly complex for small-scale collaboration or lack features to foster a sense of shared ownership. Taskr aims to bridge the gap, providing the right balance of structure and simplicity for coordination.
+- **Dialogue Dynamics with Mischief, the Quizmaster:** Mischief enhances the gameplay with his unique reactions to players' answers, enriching the interactive experience with lively comments that vary based on player performance.
+- **Quiz Interactions:** Players can start new quizzes, answer questions, and proceed through a series of increasingly tricky queries.
+- **Score Tracking:**  Players' scores are recorded throughout their session, allowing them to see their current standing and review past performance in future sessions.
+- **User Accounts:** Enable users to register and log in, maintaining a record of their scores and progress over time for a personalized gaming experience.
+- **Feedback Mechanism:** Players have the ability to leave comments on their quiz experience, influencing future game improvements and adjustments.
 
-## 🧱 Core Functionality
+## Requirements
+### User Stories
 
--   **Project Creation:** Users can create new shared projects with a title and basic description.
--   **User Management:** Users can join existing projects using a unique project code.
--   **Task Management:** Within a project, users can:
-    -   Create new tasks with descriptions and due dates.
-    -   Assign tasks to specific project members.
-    -   Mark tasks as completed.
--   **Basic Notifications:** Users receive notifications when assigned a task or when a task they're involved in is marked complete.
--   **In-Task Chat:** Simple comment threads attached to tasks for focused discussions.
--   **Custom Task Statuses:** Ability to define statuses beyond "Not Started" and "Completed" (e.g., "In Progress", "Blocked")
+#### Quiz Partcipation
 
-### Requirements
+- **As a player, I want to start a quiz** so that I can test my knowledge with challenging questions.
+- **As a player, I want to receive immediate feedback on my answers** to learn whether I got them right or wrong.
+- **As a player, I want to see my current score during the quiz** to track my progress in real-time.
+- **As a player, I want to see my highest score at the end of the quiz**  to see if I have beaten my previous records.
+- **As a player, I want to mute and unmute game music** to customize my quiz experience according to my preference.
 
-#### Task Stories
+#### Account Management
 
--   As a user, I want to create a task so that I can keep track of what I have to get done.
--   As a user, I want to view my tasks in a list so I can see what needs my attention.
--   As a user, I want to edit a task to update its details or due date.
--   As a user, I want to mark a task as complete so I can track my progress.
--   As a user, I want to delete a task when it's no longer relevant.
+- **As a user, I want to register for an account** to maintain a record of my scores and participate in the game.
+- **As a user, I want to log in** to access my high scores and participate under my username.
+- **As a user, I want to log out** to ensure my account is secure when I'm not using it.
 
-#### Project Stories
+#### Feedback and Interaction
 
--   As a user, I want to create a new project so I can organize a set of related tasks.
--   As a user, I want to join a project using an invite code so I can collaborate with others.
--   As a user, I want to view all projects I'm part of to easily switch between them.
+- **As a player, I want to submit feedback on my quiz experience** to help improve the game and express my opinions.
+- **As a player, I want to edit and delete my own feedback** to refine my contributions or remove them if I change my mind.
+- **As a player, I want to view feedback left by others** to see what other players think about the game.
 
-#### User Management Stories
+#### System Functionality
 
--   As a user, I want to register for an account so I can start using the app.
--   As a user, I want to log in to my account to access my tasks and projects.
--   As a user, I want to log out of my account to securely end my session.
-
-#### Comment Stories
-
--   As a user, I want to leave a comment on a task to ask for clarification or provide an update.
--   As a user, I want to see comments from other team members on a task to stay on the same page.
--   As a user, I want to be notified if there's a new comment on a task I'm involved with.
-
-#### Status Stories
-
--   As a user, I want to mark a task as "In Progress" to signal that I'm actively working on it.
--   As a user, I want to mark a task as "Blocked" to indicate that I can't proceed due to a dependency.
--   As a user, I want to view tasks grouped by their status to get a quick overview of the project's health.
+- **As the system, I need to authenticate users** to ensure that only registered players can create, edit, and delete feedback, and access personalized features like score tracking and music preferences.
+- **As a system, I need to accurately calculate and display scores to provide immediate feedback to users.**
+- **As the system, I need to implement security measures to protect user data** from unauthorized access and ensure compliance with data protection regulations.
+- **As the system, I need to manage session states efficiently** so that users can experience a seamless flow through the quiz without data loss or duplication.
 
 ## ᛦ Entity Relationships
 
->[!note]
-> If you view the source code for this README file, you'll see the Mermaid syntax that generated the following diagram. You can copy the code into the [live Mermaid editor](https://mermaid.live) to play around and make changes specific to your app.
-
 ```mermaid
 erDiagram
-    PROJECT ||--o{ TASK : contains
-    PROJECT ||--o{ USER_PROJECT : "is managed by"
-    USER |o--o{ TASK : "assigned to"
-    USER ||--o{ USER_PROJECT : "works on"
-    TASK ||--o{ SUBTASK : has
-    TASK ||--o{ NOTIFICATION: emits
-    TASK ||--o{ COMMENT: has
-    USER ||--o{ COMMENT: writes
-    NOTIFICATION ||--o{ USER_NOTIFICATION: pings
-    USER ||--o{ USER_NOTIFICATION: receives
-
-    USER_PROJECT {
-        int user_id PK, FK
-        int project_id PK, FK
-    }
-
-    TASK {
-        int id PK
-        string title
-        string description
-        enum status "complete | in progress | unassigned | blocked"
-        date created_at
-        date edited_at
-        int project_id FK
-        int assignee FK
-    }
-
-    SUBTASK {
-        int id PK
-        string title
-        date created_at
-        date edited_at
-        int task_id FK
-    }
-
-    PROJECT {
-        int id PK
-        string title
-        string description
-        date created_at
-        date edited_at
-    }
+    USER ||--o{ QUIZ_SESSION : "participates in"
+    USER ||--o{ SCORE : "achieves"
+    USER ||--o{ FEEDBACK : "submits"
+    QUIZ_SESSION ||--o{ QUESTION : "answers"
+    QUESTION ||--|{ ANSWER : "has"
 
     USER {
         int id PK
+        string username
         string email
-        string name
+        string password
         date created_at
-        date edited_at
+        date last_login
     }
 
-    COMMENT {
+    QUIZ_SESSION {
         int id PK
+        int user_id FK
+        date start_time
+        date end_time
+        string status "active | completed | aborted"
+    }
+
+    QUESTION {
+        int id PK
+        string content
+        string correct_answer
+    }
+
+    ANSWER {
+        int question_id PK, FK
+        string option
+        bool is_correct
+    }
+
+    SCORE {
+        int id PK
+        int user_id FK
+        int session_id FK
+        int current_score
+        int highest_score
+    }
+
+    FEEDBACK {
+        int id PK
+        int user_id FK
         string content
         date created_at
         date edited_at
-        id user_id FK "comment author"
-        id task_id FK
-    }
-
-    NOTIFICATION {
-        int id PK
-        string content
-        date created_at
-        id task_id FK
-    }
-
-    USER_NOTIFICATION {
-        int user_id PK, FK
-        int notification_id PK, FK
     }
 ```
 
--   **Authentication System:** Handling user registration, login, logout, and session management.
--   **Project Management:** Logic for project creation, joining projects, and CRUD operations on projects.
--   **Task Management:** Logic for task creation, assignment, updates, filtering, and notifications.
--   **UI Elements:** Design of forms, task lists, project overview, notification lists.
-
 ## 📍 API Routes
+### User Authentication
 
->[!note]
-> These are only a few routes to give you an idea, these would definitely not be all the routes for this kind of app!
+| Request        | Action                               | Response             | Description                                    |
+| -------------- | ------------------------------------ | -------------------- | ---------------------------------------------- |
+| GET /login     | AuthController::getLoginForm         | 200 /login-view      | Display the login form.                        |
+| POST /login    | AuthController::login                | 302 Redirect /home2-view // 401 or 400  | Process login and redirect to home if successful. |
+| GET /register  | AuthController::getRegistrationForm  | 200 /register-view   | Display the registration form.                 |
+| POST /register | AuthController::register             | 302 Redirect /login-view // 400 | Process registration and redirect to login.    |
+| GET /logout    | AuthController::logout               | 302 Redirect /home-view // 401  | Logout user and redirect to home page.         |
 
-### Project Management
+### Quiz Management
 
-| Request              | Action                           | Response              | Description                                                             |
-| -------------------- | -------------------------------- | --------------------- | ----------------------------------------------------------------------- |
-| POST /projects       | ProjectController::createProject | 201 /projects/:id     | Create a new project and redirect to the project's view                 |
-| GET /projects/:id    | ProjectController::getProject    | 200 ProjectDetailView | Retrieve details of a specific project                                  |
-| PUT /projects/:id    | ProjectController::updateProject | 200 ProjectDetailView | Update an existing project's information                                |
-| DELETE /projects/:id | ProjectController::deleteProject | 204 (No Content)      | Delete a project (consider implications – should tasks be deleted too?) |
+| Request           | Action                         | Response              | Description                                                           |
+| ----------------- | ------------------------------ | --------------------- | --------------------------------------------------------------------- |
+| GET /quiz/start   | QuizController::startQuiz      | 200 /questions-view // 401   | Start the quiz and show the first question.                           |
+| POST /quiz/answer | QuizController::submitAnswer   | 200 /questions-view // 404 if quiz session ended  | Submit an answer, provide immediate feedback, then load the next question.   |
+| GET /quiz/next    | QuizController::nextQuestion   | 200 /questions-view // 404  | Load the next question within the questions view.                     |
+| GET /quiz/end     | QuizController::endQuiz        | 200 /end-view // 401, 403        | Display the end of quiz results with options to play again or return. |
 
-### Task Management
+### Feedback Mechanism
 
-| Request                                   | Action                     | Response                 | Description                        |
-| ----------------------------------------- | -------------------------- | ------------------------ | ---------------------------------- |
-| POST /projects/:projectId/tasks           | TaskController::createTask | 201 /projects/:projectId | Create a new task within a project |
-| GET /projects/:projectId/tasks/:taskId    | TaskController::getTask    | 200 TaskDetailView       | Retrieve a specific task's details |
-| PUT /projects/:projectId/tasks/:taskId    | TaskController::updateTask | 200 TaskDetailView       | Edit an existing task              |
-| DELETE /projects/:projectId/tasks/:taskId | TaskController::deleteTask | 204 (No Content)         | Delete a task                      |
+| Request                 | Action                               | Response               | Description                                                      |
+| ----------------------- | ------------------------------------ | ---------------------- | ---------------------------------------------------------------- |
+| GET /feedback           | FeedbackController::viewFeedback     | 200 /feedback-view     | Display feedback page, different permissions for logged in/out.  |
+| POST /feedback          | FeedbackController::createFeedback   | 201 /feedback-view // 401 if not logged in    | Allow logged in users to create feedback.                        |
+| PUT /feedback/:id       | FeedbackController::updateFeedback   | 200 /feedback-view // 401, 403   | Allow users to update their own feedback.                        |
+| DELETE /feedback/:id    | FeedbackController::deleteFeedback   | 200 /feedback-view // 401, 403 if user does not own feedback   | Allow users to delete their own feedback.                        |
 
 ## 📐 Wireframes
 
->[!note]
-> Don't go crazy detailed with the wireframes! These should be minimal sketches to convey to the customer what the app will roughly look like. These things tend to change over time as requirements evolve, but you need to start from somewhere.
+>[!note] > These wireframes provide a basic visual guideline for the app's design. They're simple but help visualize the flow and interaction of the game.
+
+![Home View for Logged-Out Users](images/home-view.png)
+
+The home view for logged-out users serves as the welcome page. It offers a quick introduction to the game, showcasing the playful nature of the quiz and its host, Mischief the Quizmaster. Users have the options to log in or register to play, alongside a 'Learn More' button that provides further details about the game mechanics and Mischief's role. Logged-out users can view feedback from other players through a 'Feedback' link but cannot interact or leave comments themselves.
+
+![Home View for Logged-In Users](images/home2-view.png)
+
+Once logged in, the home view transforms to welcome the player by name, inviting them directly to engage with the quiz. This view offers access to start a new quiz session with buttons for 'Start', 'Learn More' about the game, and to actively participate in the 'Feedback' section. Feedback becomes interactive for logged-in users, allowing them to post, edit, and delete their comments based on their game experience. This interactive feedback mechanism is designed to foster community interaction and influence game improvements.
+
+![Register View](images/register-view.png)
+
+The register view allows new players to join the Mischievous Quiz by filling out a form with their email, username, password, and password confirmation. A 'Register' button completes the sign-up process.
 
 ![Login View](images/login-view.png)
 
-The login view is the initial screen where users can enter their credentials to log into their account. It typically consists of a form with input fields for the username/email and password, along with a "Login" button. The login view should also include a link to the registration page for new users who don't have an account yet.
+The login view is designed for returning users to quickly access their accounts. It includes fields for email and password, as well as a 'Remember Me' checkbox for convenience. The form culminates with a 'Login' button, and there's a link to the registration page for newcomers.
 
-![List View](images/list-view.png)
+![Questions View](images/questions-view.png)
 
-All the tasks for the logged in user where they can sort by title, due date, and created date. They can also filter tasks to only see completed or uncompleted tasks. The user can check off tasks here, or if they want a more detailed view, can click on one of the tasks (see next view).
+This view displays the current question number and the user's score at the top. The main area presents the quiz question and multiple-choice answers. Each question is accompanied by Mischief, the quizmaster, who dynamically changes expressions and provides engaging dialogue based on the user's responses. This interactive element adds a unique and lively aspect to the quiz, enhancing the gaming experience. The user's current score is also displayed, updating with each answered question.
 
-![Show View](images/show-view.png)
+![End View](images/end-view.png)
 
-This view shows the user more details for one specific task. If a due date was set, it will tell them how many days from now the task is due. There is a description field to provide more context for the task, as well as task actions to mark the task as complete, edit the task, or delete. On the right we have a sub-task list so that the user can breakdown the task steps even further. The sub-tasks can be checked off when completed.
-
-![Profile View](images/profile-view.png)
-
-The user profile shows the user's profile picture if set, and gives them a place where they can update their email and password. Here is also where they can control if the site is displayed in light or dark mode depending on the value of the toggle switch.
+After completing the quiz, the end view congratulates the player and displays their final score along with their highest score to date. Options to 'Play Again' or 'Return' to the main menu allow players to either restart the quiz or exit to the Homescreen.
