@@ -51,38 +51,51 @@ Many quiz games either lack interactivity or are not challenging enough, leading
 
 ```mermaid
 erDiagram
-    USER ||--o{ QUIZ_SESSION : "participates in"
-    USER ||--o{ SCORE : "achieves"
-    USER ||--o{ FEEDBACK : "submits"
-    QUIZ_SESSION ||--o{ QUESTION : "answers"
-    QUESTION ||--|{ ANSWER : "has"
+    USER ||--o{ QUIZ_SESSION : "initiates"
+    QUIZ_SESSION ||--o{ USER_ANSWER : "includes"
+    USER_ANSWER ||--o{ QUESTION : "answers"
+    QUESTION ||--o{ ANSWER : "presents"
+    USER_ANSWER ||--o{ ANSWER : "selects"
+    QUIZ_SESSION ||--|{ SCORE : "generates"
+    USER ||--|{ SCORE : "achieves"
+    USER ||--o{ FEEDBACK : "provides"
 
     USER {
         int id PK
         string username
         string email
         string password
-        date created_at
-        date last_login
+        datetime created_at
+        datetime last_login
     }
 
     QUIZ_SESSION {
         int id PK
         int user_id FK
-        date start_time
-        date end_time
+        datetime start_time
+        datetime end_time
         string status "active | completed | aborted"
+        string questionIds "Array of Question IDs"
     }
 
     QUESTION {
         int id PK
         string content
-        string correct_answer
+        int correctAnswerId FK
     }
 
     ANSWER {
-        int question_id PK, FK
-        string option
+        int id PK
+        int question_id FK
+        string content
+    }
+
+    USER_ANSWER {
+        int user_id FK
+        int session_id FK
+        int question_id FK
+        int answer_id FK
+        string userSelectedAnswer "User's actual answer as text"
         bool is_correct
     }
 
@@ -98,8 +111,8 @@ erDiagram
         int id PK
         int user_id FK
         string content
-        date created_at
-        date edited_at
+        datetime created_at
+        datetime edited_at
     }
 ```
 
