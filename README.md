@@ -55,7 +55,7 @@ erDiagram
     QUIZ_SESSION ||--o{ USER_ANSWER : "includes"
     USER_ANSWER ||--o{ QUESTION : "answers"
     QUESTION ||--o{ ANSWER : "presents"
-    USER_ANSWER ||--o{ ANSWER : "selects"
+    USER_ANSWER ||--|| ANSWER : "selects"
     QUIZ_SESSION ||--|{ SCORE : "generates"
     USER ||--|{ SCORE : "achieves"
     USER ||--o{ FEEDBACK : "provides"
