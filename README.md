@@ -91,11 +91,11 @@ erDiagram
     }
 
     USER_ANSWER {
+        int id PK
         int user_id FK
         int session_id FK
         int question_id FK
         int answer_id FK
-        string userSelectedAnswer "User's actual answer as text"
         bool is_correct
     }
 
