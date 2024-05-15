@@ -75,18 +75,16 @@ erDiagram
         datetime start_time
         datetime end_time
         string status "active | completed | aborted"
-        string questionIds "Array of Question IDs"
     }
 
     QUESTION {
         int id PK
         string content
-        int correctAnswerId FK
+        int correct_answer_id FK
     }
 
     ANSWER {
         int id PK
-        int question_id FK
         string content
     }
 
@@ -96,7 +94,6 @@ erDiagram
         int session_id FK
         int question_id FK
         int answer_id FK
-        bool is_correct
     }
 
     SCORE {
