@@ -1,5 +1,36 @@
 {{> Header }}
 
-<h1>Homepage!</h1>
+<div class="container">
+    <div class="background-image"></div>
+
+    {{#if isLoggedIn}}
+        <div class="content">
+            <h1>Welcome {{userName}}, to the Mischievous Quiz</h1>
+            <p class="zeyada-font">Dare to challenge the quizmaster? Spoiler: I'm undefeated</p>
+            <div class="buttons">
+                <a href="/start" class="button">Start</a>
+                <a href="/learn-more" class="button">Learn More</a>
+                <a href="/feedback" class="button">Feedback</a>
+            </div>
+        </div>
+        <div class="quizmaster">
+            <img src="/mischief-expressions/huh.webp" alt="Quizmaster">
+            <p>*potentially adding music control*</p>
+        </div>
+    {{else}}
+        <div class="content">
+            <h1 class="indie-font">Welcome to the Mischievous Quiz</h1>
+            <p class="zeyada-font">Let's get this party started! Remember, I'm not responsible for any bruised egos.</p>
+            <p class="zeyada-font">Accept the challenge by logging in or signing up</p>
+            <div class="buttons">
+                <a href="/learn-more" class="button">Learn More</a>
+                <a href="/feedback" class="button">Feedback</a>
+            </div>
+        </div>
+        <div class="quizmaster">
+            <img src="/mischief-expressions/huh.webp" alt="Quizmaster">
+        </div>
+    {{/if}}
+</div>
 
 {{> Footer }}

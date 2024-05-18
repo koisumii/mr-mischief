@@ -35,4 +35,8 @@ export default class Session {
 	isExpired() {
 		return this.cookie.getExpires() <= Date.now();
 	}
+
+	getCookie(): Cookie {
+        return this.cookie;
+    }
 }

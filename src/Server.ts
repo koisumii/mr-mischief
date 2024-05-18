@@ -2,7 +2,7 @@ import http, { IncomingMessage, ServerResponse } from "http";
 import Request from "./router/Request";
 import Response, { StatusCode } from "./router/Response";
 import Router from "./router/Router";
-import Controller from "./controllers/Controller";
+import UserController from "./controllers/UserController";
 import postgres from "postgres";
 import fs from "fs/promises";
 import SessionManager from "./auth/SessionManager";
@@ -30,7 +30,7 @@ export default class Server {
 	private server: http.Server;
 	private sql: postgres.Sql;
 	private router: Router;
-	private controller: Controller;
+	private userController: UserController;
 
 	/**
 	 * Initializes a new Server instance. The server is not started until the `start` method is called.
@@ -43,9 +43,9 @@ export default class Server {
 		this.port = serverOptions.port;
 
 		this.router = new Router();
-		this.controller = new Controller(this.sql);
+		this.userController = new UserController(this.sql);
 
-		this.controller.registerRoutes(this.router);
+		this.userController.registerRoutes(this.router);
 
 		this.router.get("/", (req: Request, res: Response) => {
 			res.send({
@@ -136,11 +136,18 @@ export default class Server {
 	 * .css, .js, and any image/video/audio file types.
 	 */
 	serveStaticFile = async (url: string, res: ServerResponse) => {
-		const filePath = `.${url}`;
-		const file = await fs.readFile(filePath);
-
-		res.end(file);
-		return;
+        const filePath = `.${url}`;
+        try {
+            const file = await fs.readFile(filePath);
+            res.end(file);
+        } catch (error) {
+            console.error(`Error serving static file: ${error}`);
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("404 Not Found");
+			// application kept crashing looking for a favIcon..? this is my attempt to take care of it so 
+			// I stop crashing because I don't really understand where it's coming from or why, the error does not
+			// show me the full extent or which line it happens
+        }
 	};
 
 	/**

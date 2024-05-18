@@ -4,6 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Tangerine:wght@400;700&family=Zeyada&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Indie+Flower&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ styles 'style.css' }}">
 	<title>{{ title }}</title>
 </head>
@@ -13,6 +15,12 @@
 		<nav>
 			<ul>
 				<li><a href="{{ path '' }}">Home</a></li>
+				{{#if isLoggedIn}}
+					<li><a href="{{ path 'logout' }}">Logout</a></li>
+				{{else}}
+					<li><a href="{{ path 'login' }}">Login</a></li>
+					<li><a href="{{ path 'register' }}">Register</a></li>
+				{{/if}}
 			</ul>
 		</nav>
 	</header>
