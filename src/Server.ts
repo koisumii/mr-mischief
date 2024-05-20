@@ -7,6 +7,9 @@ import postgres from "postgres";
 import fs from "fs/promises";
 import SessionManager from "./auth/SessionManager";
 import Cookie from "./auth/Cookie";
+import QuizSessionController from "./controllers/QuizSessionController";
+import FeedbackController from "./controllers/FeedbackController";
+
 
 /**
  * Options for creating a new Server instance.
@@ -31,6 +34,8 @@ export default class Server {
 	private sql: postgres.Sql;
 	private router: Router;
 	private userController: UserController;
+	private quizSessionController: QuizSessionController;
+	private feedbackController: FeedbackController;
 
 	/**
 	 * Initializes a new Server instance. The server is not started until the `start` method is called.
@@ -44,16 +49,25 @@ export default class Server {
 
 		this.router = new Router();
 		this.userController = new UserController(this.sql);
+        this.quizSessionController = new QuizSessionController();
+		this.feedbackController = new FeedbackController(this.sql);
 
 		this.userController.registerRoutes(this.router);
+        this.quizSessionController.registerRoutes(this.router);
+		this.feedbackController.registerRoutes(this.router);
 
 		this.router.get("/", (req: Request, res: Response) => {
+			const isLoggedIn = req.session.get('isLoggedIn') || false;
+			const userName = req.session.get('userName') || '';
+		
 			res.send({
 				statusCode: StatusCode.OK,
 				message: "Homepage!",
 				template: "HomeView",
 				payload: {
 					title: "My App",
+					isLoggedIn: isLoggedIn,
+					userName: userName
 				},
 			});
 		});

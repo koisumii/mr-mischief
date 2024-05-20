@@ -1,0 +1,13 @@
+{{> Header }}
+
+<div class="container">
+    <h2>Edit Feedback</h2>
+    <div class="feedback-background"></div>
+    <form id="edit-feedback-form" method="post" action="/feedback/{{feedback.id}}/edit">
+        <input type="hidden" name="method" value="PUT">
+        <textarea name="feedback" placeholder="Edit your feedback here...">{{feedback.content}}</textarea>
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+{{> Footer }}

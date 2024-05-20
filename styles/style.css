@@ -20,7 +20,7 @@ body, html {
 }
 
 .background-image {
-    background: url('/images/movie-reel.png') no-repeat center center fixed;
+    background: url('/images/book.png') no-repeat center center fixed;
     background-size: cover;
     position: fixed;
     top: 0;
@@ -30,8 +30,31 @@ body, html {
     z-index: -1;
 }
 
-.register-background{
+.register-background,
+.login-background {
     background: url('/images/newspaper.png') no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.end-background{
+    background: url('/images/vintage-library-with-old-books-background_407474-10015.png') no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.quiz-background {
+    background: url('/images/theatre.png') no-repeat center center fixed;
     background-size: cover;
     position: fixed;
     top: 0;
@@ -69,8 +92,8 @@ header nav ul li a:hover {
 }
 
 .content {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 40px 90px; 
+    background: #ffeed8b7;
+    padding: 40px 90px;
     border-radius: 10px;
     max-width: 650px;
     width: 80%;
@@ -83,12 +106,12 @@ header nav ul li a:hover {
 }
 
 h1 {
-    font-size: 36px; /* Increased font size */
+    font-size: 36px;
 }
 
 p {
-    font-size: 30px; /* Increased font size */
-    margin: 10px 0;  /* Increased margin */
+    font-size: 30px;
+    margin: 10px 0;
 }
 
 .zeyada-font {
@@ -97,7 +120,7 @@ p {
     font-style: normal;
 }
 
-.indie-font{
+.indie-font {
     font-family: "Indie Flower", cursive;
     font-weight: 400;
     font-style: normal;
@@ -111,24 +134,138 @@ p {
 }
 
 .button {
-    background-color: #c4a484; /* light beige color */
+    background-color: #c4a484;
     color: white;
     text-decoration: none;
-    padding: 20px 40px; /* Increased padding */
+    padding: 20px 40px;
     border-radius: 5px;
-    margin: 15px 0; /* Increased margin */
-    font-size: 20px; /* Increased font size */
+    margin: 15px 0;
+    font-size: 20px;
     transition: background-color 0.3s;
 }
 
 .button:hover {
-    background-color: #a67d4d; /* darker beige color for hover effect */
+    background-color: #a67d4d;
+}
+
+.quiz-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.quiz-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffeed8;
+    border-bottom: 2px solid #c4a484;
+}
+
+.site-title {
+    font-family: "Indie Flower", cursive;
+    font-size: 36px;
+    margin: 0;
+}
+
+.quiz-content {
+    background: #ffeed8b7;
+    padding: 65px 150px;
+    border-radius: 10px;
+    max-width: 850px;
+    width: 80%;
+    margin: 120px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-number, .current-score {
+    font-family: "Indie Flower", cursive;
+    font-size: 55px;
+}
+
+.question-section h3 {
+    font-family: "Indie Flower", cursive;
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.feedback-section {
+    margin: 20px 0;
+    font-size: 20px;
+    font-family: "Indie Flower", cursive;
+}
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+.correct-answer {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.incorrect-answer {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.options-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.option-button {
+    background-color: #c4a484;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.option-button:hover {
+    background-color: #a67d4d;
+}
+
+.option-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.next-button-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .quizmaster {
-    position: absolute;
-    bottom: 60px; /* Adjusted position */
-    right: 50px; /* Adjusted position */
+    position: fixed;
+    bottom: 60px;
+    right: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,9 +273,15 @@ p {
 }
 
 .quizmaster img {
-    width: 250px; /* Increased size */
+    width: 250px;
     height: auto;
     margin-bottom: 13px;
+}
+
+#quizmaster-dialogue {
+    font-family: "Indie Flower", cursive;
+    font-size: 18px;
+    text-align: center;
 }
 
 /* Form specific styles */
@@ -156,6 +299,54 @@ p {
     box-sizing: border-box;
 }
 
+.end-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.end-container h2, .end-container p {
+    font-family: "Indie Flower", cursive;
+    font-size: 30px;
+    margin: 10px 0;
+    background:  #c4a484;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.end-container .score-container {
+    margin: 20px 0;
+}
+
+.end-container .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Align checkbox and label */
+.form-group label[for="rememberMe"] {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    font-size: 20px;
+}
+
+.form-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* Space between checkbox and label */
+}
+
 .error {
     color: red;
     font-weight: bold;
@@ -168,9 +359,8 @@ p {
     margin-bottom: 15px;
 }
 
-/* for later
 .loader {
-    display: flex;
+    display: hidden;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -181,4 +371,162 @@ p {
     background-color: black;
     z-index: 9999;
 }
-*/
+
+.loader img {
+    width: 100%;
+    height: auto;
+}
+
+/* Feedback Form Styles */
+
+#feedback-form {
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#feedback-form textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: none;
+    font-family: "Indie Flower", cursive;
+    font-size: 16px;
+}
+
+#feedback-form button {
+    background-color: #c4a484;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+#feedback-form button:hover {
+    background-color: #a67d4d;
+}
+
+#feedback-messages {
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto;
+}
+
+.feedback-message {
+    background: #ffeed8b7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.feedback-message p {
+    margin: 0;
+    font-family: "Indie Flower", cursive;
+    font-size: 18px;
+}
+
+.edit-button, .delete-form button {
+    background-color: #c4a484;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button:hover, .delete-form button:hover {
+    background-color: #a67d4d;
+}
+
+.edit-button {
+    position: absolute;
+    top: 10px;
+    right: 70px;
+}
+
+.delete-form {
+    display: inline;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* for larger screens.. */
+@media (min-width: 1440px) {
+    .content {
+        padding: 70px 170px;
+        max-width: 770px;
+        margin: 120px;
+    }
+
+    .register-content {
+        background: #ffeed8b7;
+        padding: 65px 150px;
+        border-radius: 10px;
+        max-width: 965px;
+        width: 80%;
+        margin: 150px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-content {
+        background: #ffeed8b7;
+        padding: 65px 150px;
+        border-radius: 10px;
+        max-width: 965px;
+        width: 80%;
+        margin: 230px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 55px;
+    }
+
+    p {
+        font-size: 38px;
+    }
+
+    header nav ul li a {
+        font-size: 23px;
+    }
+
+    .button {
+        padding: 25px 50px;
+        font-size: 24px;
+    }
+
+    .quizmaster {
+        bottom: 150px;
+        right: 95px;
+    }
+
+    .quizmaster img {
+        width: 370px;
+        margin-bottom: 60px;
+    }
+}

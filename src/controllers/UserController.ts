@@ -180,6 +180,7 @@ export default class UserController {
             const user = await User.login(this.sql, email, password);
             req.session.set('userId', user.props.id);
             req.session.set('isLoggedIn', true);
+            req.session.set('userName', user.props.username);
             const sessionCookie = new Cookie('session_id', req.session.id);
             res.setCookie(sessionCookie);
 
@@ -194,7 +195,7 @@ export default class UserController {
             res.send({
                 statusCode: StatusCode.Redirect,
                 message: 'Logged in successfully!',
-                redirect: '/todos'
+                redirect: '/'
             });
         } catch (error) {
             req.session.set('isLoggedIn', false);
@@ -215,6 +216,7 @@ export default class UserController {
         res.send({
             statusCode: StatusCode.Redirect,
             message: 'You have been logged out successfully',
+            payload: { isLoggedIn: false },
             redirect: '/'
         });
     };

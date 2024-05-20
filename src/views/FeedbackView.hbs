@@ -1,0 +1,41 @@
+{{> Header }}
+
+<div class="container">
+    <h2>Feedback</h2>
+    <div class="feedback-background"></div>
+    {{#if isLoggedIn}}
+        <form id="feedback-form" method="post" action="/feedback/submit">
+            <textarea name="feedback" placeholder="Write your feedback here..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="feedback-messages">
+            {{#each feedbacks}}
+                <div class="feedback-message">
+                    <p>{{this.content}}</p>
+                    <div class="feedback-actions">
+                        <form method="get" action="/feedback/{{this.id}}/edit" class="edit-form">
+                            <button type="submit" class="edit-button">Edit</button>
+                        </form>
+                        <form method="post" action="/feedback/{{this.id}}/delete" class="delete-form">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <p>You must be logged in to submit feedback.</p>
+    {{/if}}
+
+    <div id="all-feedbacks">
+        <h3>All Feedbacks</h3>
+        {{#each allFeedbacks}}
+            <div class="feedback-message">
+                <p>{{this.content}}</p>
+                <p>By {{this.username}}</p>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+{{> Footer }}

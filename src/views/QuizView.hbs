@@ -1,0 +1,188 @@
+{{> Header }}
+
+<div id="loader" class="loader">
+    <img src="/images/curtains-countdown.gif" alt="Loading...">
+</div>
+
+<div class="quiz-container" id="quiz-container" style="display:none;">
+    <div class="quiz-background"></div>
+    <div class="quiz-content">
+        <h2 class="question-number">Question {{currentQuestionIndex}}/{{totalQuestions}}</h2>
+        <p class="current-score">Current score: {{score}}</p>
+
+        <div class="question-section">
+            <h3>{{question.question}}</h3>
+        </div>
+
+        <form id="quiz-form">
+            <div class="options-section">
+                {{#each question.options}}
+                    <button class="option-button" type="button" data-value="{{@index}}">{{this}}</button>
+                {{/each}}
+            </div>
+        </form>
+
+        <div class="feedback-section" id="feedback-section"></div>
+
+        <div class="next-button-section" id="next-button-section" style="display: none;">
+            <button class="button" id="next-button" type="button">Next</button>
+        </div>
+    </div>
+
+    <div class="quizmaster">
+        <img src="{{quizmasterExpression}}" alt="Quizmaster expression" id="quizmaster-expression">
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const loader = document.getElementById("loader");
+    const quizContainer = document.getElementById("quiz-container");
+
+    // Show loader initially and hide quiz container
+    setTimeout(function() {
+        loader.style.display = "none";
+        quizContainer.style.display = "flex";
+    }, 5000); // 5 seconds
+
+    // Get elements from the DOM
+    const form = document.getElementById("quiz-form");
+    const feedbackSection = document.getElementById("feedback-section");
+    const nextButtonSection = document.getElementById("next-button-section");
+    const quizmasterExpression = document.getElementById("quizmaster-expression");
+    const scoreElement = document.querySelector('.current-score');
+    const questionNumberElement = document.querySelector('.question-number');
+    const questionSection = document.querySelector('.question-section');
+    const optionsSection = document.querySelector('.options-section');
+    const nextButton = document.getElementById('next-button');
+
+    // Handle option button click event
+    form.addEventListener("click", function(event) {
+        if (event.target.tagName === "BUTTON") {
+            const button = event.target;
+            const answer = button.getAttribute("data-value");
+
+            // Send the selected answer to the server
+            fetch("/quiz", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.statusCode === 302 && data.redirect) {
+                    window.location.href = data.redirect; // Redirect to the end view
+                    return;
+                }
+
+                // Display feedback based on server response
+                feedbackSection.innerHTML = `<p class="${data.payload.isCorrect ? 'correct' : 'incorrect'}">${data.payload.feedback}</p>`;
+
+                // Disable all buttons and mark correct and incorrect answers
+                form.querySelectorAll("button").forEach(btn => {
+                    btn.disabled = true;
+                    if (parseInt(btn.getAttribute("data-value")) === data.payload.correctAnswer) {
+                        btn.classList.add("correct-answer");
+                    } else if (btn !== button) {
+                        btn.classList.add("incorrect-answer");
+                    }
+                });
+
+                // Mark the selected button as incorrect if it's wrong
+                if (button.getAttribute("data-value") != data.payload.correctAnswer) {
+                    button.classList.add("incorrect-answer");
+                }
+
+                // Update the quizmaster's expression
+                quizmasterExpression.src = data.payload.quizmasterExpression;
+
+                // Show the next button and update the score
+                nextButtonSection.style.display = "block";
+                scoreElement.textContent = `Current score: ${data.payload.score}`;
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    });
+
+    // Handle next button click event to load the next question
+    nextButton.addEventListener("click", function() {
+        fetch("/quiz/next", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.statusCode === 302 && data.redirect) {
+                window.location.href = data.redirect; // Redirect to the end view
+                return;
+            }
+
+            // Ensure the payload is defined before accessing its properties
+            if (!data.payload) {
+                console.error("Payload is undefined, redirecting to the end view");
+                window.location.href = '/quiz/end';
+                return;
+            }
+
+            // Update the question and options
+            questionNumberElement.textContent = `Question ${data.payload.currentQuestionIndex}/${data.payload.totalQuestions}`;
+            scoreElement.textContent = `Current score: ${data.payload.score}`;
+            questionSection.innerHTML = `<h3>${data.payload.question.question}</h3>`;
+            optionsSection.innerHTML = data.payload.question.options.map((option, index) => 
+                `<button class="option-button" type="button" data-value="${index}">${option}</button>`
+            ).join('');
+
+            // Reset feedback and hide next button
+            feedbackSection.innerHTML = '';
+            nextButtonSection.style.display = "none";
+
+            // Update the quizmaster's expression
+            quizmasterExpression.src = data.payload.quizmasterExpression;
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
+    // Load the first question when the page is ready
+    fetch("/quiz", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.statusCode === 302 && data.redirect) {
+            window.location.href = data.redirect; // Redirect to the end view
+            return;
+        }
+
+        if (!data.payload) {
+            console.error("Payload is undefined, redirecting to the end view");
+            window.location.href = '/quiz/end';
+            return;
+        }
+
+        // Update the question and options
+        questionNumberElement.textContent = `Question ${data.payload.currentQuestionIndex}/${data.payload.totalQuestions}`;
+        scoreElement.textContent = `Current score: ${data.payload.score}`;
+        questionSection.innerHTML = `<h3>${data.payload.question.question}</h3>`;
+        optionsSection.innerHTML = data.payload.question.options.map((option, index) => 
+            `<button class="option-button" type="button" data-value="${index}">${option}</button>`
+        ).join('');
+
+        // Reset feedback and hide next button
+        feedbackSection.innerHTML = '';
+        nextButtonSection.style.display = "none";
+
+        // Update the quizmaster's expression
+        quizmasterExpression.src = data.payload.quizmasterExpression;
+    })
+    .catch(error => console.error("Error:", error));
+});
+</script>
+
+{{> Footer }}

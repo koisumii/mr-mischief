@@ -1,0 +1,33 @@
+{{> Header }}
+
+<div class="container">
+    <div class="login-background"></div> 
+    <div class="content login-content"> 
+        <h1 class="indie-flower-font">Login</h1>
+        {{#if error}}
+            <div class="error">{{error}}</div>
+        {{/if}}
+        {{#if success}}
+            <div class="success">{{success}}</div>
+        {{/if}}
+        <form action="/login" method="POST" class="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{rememberedEmail}}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="rememberMe" name="rememberMe" {{#if rememberMeChecked}}checked{{/if}}>
+                    Remember Me
+                </label>
+            </div>
+            <button type="submit" class="button">Login</button>
+        </form>
+    </div>
+</div>
+
+{{> Footer }}

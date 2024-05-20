@@ -11,7 +11,10 @@
 </head>
 
 <body>
-	<header>
+    <header class="{{#if isQuizView}}quiz-header{{/if}}">
+        {{#if isQuizView}}
+            <h1 class="site-title">Mischievous Quiz</h1>
+        {{/if}}
 		<nav>
 			<ul>
 				<li><a href="{{ path '' }}">Home</a></li>

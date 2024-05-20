@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="register-background"></div>
-    <div class="content">
+    <div class="content register-content">
         <h1 class="indie-flower-font">Register</h1>
         {{#if error}}
             <div class="error">{{error}}</div>
@@ -29,17 +29,5 @@
     </div>
 </div>
 
-
-{{!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const loader = document.getElementById("loader");
-        const registerForm = document.getElementById("registerForm");
-
-        setTimeout(function() {
-            loader.style.display = "none";
-            registerForm.style.display = "block";
-        }, 6000); // 6 seconds
-    });
-</script> --}}
 
 {{> Footer }}
