@@ -169,3 +169,18 @@ This view displays the current question number and the user's score at the top. 
 ![End View](images/end-view.png)
 
 After completing the quiz, the end view congratulates the player and displays their final score along with their highest score to date. Options to 'Play Again' or 'Return' to the main menu allow players to either restart the quiz or exit to the Homescreen.
+
+# How to Run
+- Clone the repository `git clone https://github.com/koisumii/mr-mischief.git`
+- Install Docker
+    - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+    - [Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
+    - [Linux](https://docs.docker.com/engine/install/ubuntu/)
+- Install [VSCode](https://code.visualstudio.com/Download)
+    - Install the [Dev Container extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- Install [Node.js](https://nodejs.org/en/download)
+- Start Docker
+- Open the project in VSCode
+- Hit **CMD/CTRL + SHIFT + P**, search for `Dev Containers: Open Folder in Container...`
+- Open the terminal in VSCode (**Ctrl + J**)
+- Type `npm run server`
